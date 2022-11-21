@@ -11,6 +11,18 @@ unique(Produto, Ano_Retirado, Mes),
 primary key(Id)
 );
 
+DELIMITER $$
+create trigger Vendas_Produtos after insert
+on produtos_vendidos
+FOR EACH ROW
+BEGIN
+	update produtos_vendidos set new.Id, new.Produtos, new.Preço, Quantidade_Vendidos = Quantidade_Estoque - new.Mes, new.Ano_Retirado, new.Horario
+WHERE Produto = NEW.Produtos;
+end if;
+end$
+
+DELIMITER ;
+
 alter table produtos_vendidos add column Horario time;
 alter table produtos_vendidos add column Preço double not null after Produto;
 
@@ -19,4 +31,3 @@ insert into produtos_vendidos (Id, produto, Preço, Quantidade_Vendidos, Mes, An
 insert into produtos_vendidos (Id, produto, Preço, Quantidade_Vendidos, Mes, Ano_Retirado, Horario) values ('3', 'Samsung Galaxy A22 Branco 128 GB', '1100.00', '100', '05', '2022', '17:15:20');
 
 select * from produtos_vendidos;
-
