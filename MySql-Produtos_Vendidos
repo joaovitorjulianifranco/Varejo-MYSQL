@@ -26,8 +26,10 @@ DELIMITER ;
 alter table produtos_vendidos add column Horario time;
 alter table produtos_vendidos add column Preço double not null after Produto;
 
-insert into produtos_vendidos set Id = '1', produto = 'Smart TV LED 75 4K UHD samsung', Preço = '5890.00', Quantidade_Vendidos = '101', Mes = '12', Ano_Retirado = '2022', Horario ='16:57:00';
+insert into produtos_vendidos (Id, produto, Preço, Quantidade_Vendidos, Mes, Ano_Retirado, Horario) values ('1', 'Smart TV LED 75 4K UHD samsung', '5890.00', '101', '12', '2022', '16:57:00');
 insert into produtos_vendidos (Id, produto, Preço, Quantidade_Vendidos, Mes, Ano_Retirado, Horario) values ('2', 'Maleta de ferramentas kit com 129', '81.99', '50', '10', '2022', '17:08:00');
 insert into produtos_vendidos (Id, produto, Preço, Quantidade_Vendidos, Mes, Ano_Retirado, Horario) values ('3', 'Samsung Galaxy A22 Branco 128 GB', '1100.00', '100', '05', '2022', '17:15:20');
 
 select * from produtos_vendidos;
+
+drop table produtos_vendidos;
